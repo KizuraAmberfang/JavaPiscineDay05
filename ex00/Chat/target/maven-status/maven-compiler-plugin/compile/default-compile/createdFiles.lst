@@ -1,0 +1,5 @@
+edu/school21/chat/models/Message.class
+edu/school21/chat/models/DBConnection.class
+edu/school21/chat/models/User.class
+edu/school21/chat/models/App.class
+edu/school21/chat/models/Chatroom.class

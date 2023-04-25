@@ -1,6 +1,8 @@
 package edu.school21.chat.models;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -34,25 +36,19 @@ public class DBConnection {
     }
 
     public void process(String sqlUrl) {
-        File sqlFile = new File(sqlUrl);
-        Scanner scan;
-        try {
-            scan = new Scanner(sqlFile).useDelimiter(";");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        InputStreamReader inputstream = new InputStreamReader(
+                DBConnection.class.getClassLoader().getResourceAsStream(sqlUrl));
+        Scanner input = new Scanner(inputstream).useDelimiter(";");
         try {
             Statement statement = connection.createStatement();
-            while (scan.hasNext()) {
-                statement.execute(scan.next());
+            while (input.hasNext()) {
+                statement.execute(input.next());
             }
             System.out.printf("%s successful executed\n", sqlUrl);
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        scan.close();
-
+        input.close();
     }
 }

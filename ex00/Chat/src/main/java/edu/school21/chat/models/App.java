@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) {
         DBConnection connection = new DBConnection(connectionString, user, pass);
         connection.connect();
-        connection.process("/home/riku/Documents/Java/JavaPiscineDay05/ex00/Chat/src/main/resources/schema.sql");
-        connection.process("/home/riku/Documents/Java/JavaPiscineDay05/ex00/Chat/src/main/resources/data.sql");
+        connection.process("schema.sql");
+        connection.process("data.sql");
     }
 }

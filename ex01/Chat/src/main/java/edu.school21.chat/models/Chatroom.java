@@ -4,12 +4,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class Chatroom {
-    int chatID;
+    long chatID;
     String chatName;
     User owner;
     List<Message> messages;
 
-    public int getChatId() {
+    public Chatroom(long id, String name, User own, List<Message> msgs) {
+        this.chatID = id;
+        this.chatName = name;
+        this.owner = own;
+        this.messages = msgs;
+    }
+
+    public long getChatId() {
         return (this.chatID);
     }
 

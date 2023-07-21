@@ -58,4 +58,8 @@ public class DBConnection {
 
         return (new HikariDataSource(config));
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }

@@ -5,13 +5,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
-    private int userID;
+    private long userID;
     private String login;
     private String password;
     private List<Chatroom> createdRoom = new ArrayList<Chatroom>();
     private List<Chatroom> chatRoom = new ArrayList<Chatroom>();
 
-    public int getUserId() {
+    public User(long id, String log, String pwd, List<Chatroom> crRoom, List<Chatroom> chRoom) {
+        this.userID = id;
+        this.login = log;
+        this.password = pwd;
+        this.createdRoom = crRoom;
+        this.chatRoom = chRoom;
+    }
+
+    public long getUserId() {
         return (userID);
     }
 

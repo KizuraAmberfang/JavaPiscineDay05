@@ -4,14 +4,22 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Message {
-    int messageID;
+    long messageID;
     User author;
     Chatroom room;
     String text;
     Timestamp timestamp;
 
-    public int getMessageId() {
+    public long getMessageId() {
         return (this.messageID);
+    }
+
+    public Message(long id, User author, Chatroom room, String text, Timestamp messageDateTime) {
+        this.messageID = id;
+        this.author = author;
+        this.room = room;
+        this.text = text;
+        this.timestamp = messageDateTime;
     }
 
     @Override

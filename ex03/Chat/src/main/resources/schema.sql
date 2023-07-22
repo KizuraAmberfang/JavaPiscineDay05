@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS chat.chatroom (
 
 CREATE TABLE IF NOT EXISTS chat.message (
     message_id SERIAL PRIMARY KEY,
-    author INT NOT NULL,
-    room INT NOT NULL,
-    text_message text NOT NULL,
-    data_time TIMESTAMP NOT NULL, 
+    author INT,
+    room INT,
+    text_message text,
+    data_time TIMESTAMP, 
     FOREIGN KEY (author) REFERENCES chat.user (user_id),
     FOREIGN KEY (room) REFERENCES chat.chatroom (chat_id)
 );

@@ -36,17 +36,4 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         }
         return (Optional.ofNullable(user));
     }
-
-    @Override
-    public void save(User user) {
-        try {
-            PreparedStatement query = conn.prepareStatement("INSERT INTO chat.user VALUES (?, ?, ?)");
-            query.setLong(1, user.getUserId());
-            query.setString(2, user.getLogin());
-            query.setString(3, user.getPassword());
-            query.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

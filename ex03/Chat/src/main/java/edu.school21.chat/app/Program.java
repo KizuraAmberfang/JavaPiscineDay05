@@ -28,11 +28,14 @@ public class Program {
         UserRepository userRepo = new UserRepositoryJdbcImpl(connection.getConnection());
         ChatroomRepository chatRepo = new ChatroomRepositoryJdbcImpl(connection.getConnection(), userRepo);
         MessagesRepository msgRepo = new MessagesRepositoryJdbcImpl(connection.getConnection(), userRepo, chatRepo);
-        Scanner scanner = new Scanner(System.in);
-        User u = new User(1L, "user", "user", new ArrayList(), new ArrayList());
-        Chatroom room = new Chatroom(2L, "room", u, new ArrayList<>());
-        Message msg = new Message(null, u, room, "Hello!", new Timestamp(new Date().getTime()));
-        msgRepo.save(msg);
-        System.out.println(msg.getMessageId());
+        Message msg = msgRepo.findById(4L).get();
+        System.out.println("Before: " + msg.toString());
+        msg.setAuthor(null);
+        msg.setRoom(null);
+        msg.setText(null);
+        msg.setTimestamp(null);
+        msgRepo.update(msg);
+        msg = msgRepo.findById(4L).get();
+        System.out.println("After : " + msg.toString());
     }
 }

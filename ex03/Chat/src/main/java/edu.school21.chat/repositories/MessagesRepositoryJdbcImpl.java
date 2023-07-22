@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -57,6 +58,30 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
             ResultSet result = query.executeQuery();
             if (result.next())
                 msg.setId(result.getLong("message_id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchElementException e) {
+            throw new NotSavedSubEntityException();
+        }
+    }
+
+    @Override
+    public void update(Message msg) {
+        try {
+            PreparedStatement query = conn.prepareStatement(
+                    "UPDATE chat.message SET author = ?, room = ?, text_message = ?, data_time = ? WHERE message_id = ?");
+            if (msg.getAuthor() != null)
+                query.setLong(1, userRepo.findById(msg.getAuthor().getUserId()).get().getUserId());
+            else
+                query.setNull(1, Types.INTEGER);
+            if (msg.getRoom() != null)
+                query.setLong(2, chatRepo.findById(msg.getRoom().getChatId()).get().getChatId());
+            else
+                query.setNull(2, Types.INTEGER);
+            query.setString(3, msg.getText());
+            query.setTimestamp(4, msg.getTimestamp());
+            query.setLong(5, msg.getMessageId());
+            query.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NoSuchElementException e) {

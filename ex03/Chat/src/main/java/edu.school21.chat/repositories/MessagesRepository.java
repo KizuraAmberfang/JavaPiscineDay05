@@ -8,4 +8,6 @@ public interface MessagesRepository {
     Optional<Message> findById(Long id);
 
     void save(Message msg);
+
+    void update(Message msg);
 }

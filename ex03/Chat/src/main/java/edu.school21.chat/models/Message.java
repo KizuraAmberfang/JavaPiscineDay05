@@ -8,10 +8,10 @@ import edu.school21.chat.repositories.NotSavedSubEntityException;
 
 public class Message {
     Long messageID;
-    User author;
-    Chatroom room;
-    String text;
-    Timestamp timestamp;
+    User author = null;
+    Chatroom room = null;
+    String text = null;
+    Timestamp timestamp = null;
 
     public Long getMessageId() {
         return (messageID);
@@ -45,6 +45,21 @@ public class Message {
         this.messageID = newId;
     }
 
+    public void setAuthor(User newAuthor) {
+        this.author = newAuthor;
+    }
+
+    public void setRoom(Chatroom newRoom) {
+        this.room = newRoom;
+    }
+
+    public void setText(String newText) {
+        this.text = newText;
+    }
+    public void setTimestamp(Timestamp t) {
+        this.timestamp = t;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -69,7 +84,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return (this.messageID + " | from: " + this.author.getLogin() + " | room: " + this.room.getChatName() + " | "
+        return (this.messageID + " | from: " + (this.author != null ? this.author.getLogin() : author) + " | room: " + (this.room != null ? this.room.getChatName() : this.room) + " | "
                 + this.timestamp + " | " + this.text + "\n");
     }
 

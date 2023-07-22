@@ -31,11 +31,11 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
             ResultSet result = query.executeQuery();
             if (result.next()) {
                 msg = new Message(
-                        result.getLong(0),
-                        userRepo.findById(result.getLong(1)).orElse(null),
-                        chatRepo.findById(result.getLong(2)).orElse(null),
-                        result.getString(3),
-                        result.getTimestamp(4));
+                        result.getLong("message_id"),
+                        userRepo.findById(result.getLong("author")).orElse(null),
+                        chatRepo.findById(result.getLong("room")).orElse(null),
+                        result.getString("text_message"),
+                        result.getTimestamp("data_time"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

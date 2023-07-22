@@ -25,9 +25,9 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             ResultSet result = query.executeQuery();
             if (result.next()) {
                 user = new User(
-                        result.getLong(0),
-                        result.getString(1),
-                        result.getString(2),
+                        result.getLong("user_id"),
+                        result.getString("login"),
+                        result.getString("password"),
                         new ArrayList<>(),
                         new ArrayList<>());
             }

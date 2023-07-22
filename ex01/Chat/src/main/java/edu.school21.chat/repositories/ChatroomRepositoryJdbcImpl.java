@@ -27,9 +27,9 @@ public class ChatroomRepositoryJdbcImpl implements ChatroomRepository {
             ResultSet result = query.executeQuery();
             if (result.next()) {
                 chat = new Chatroom(
-                        result.getLong(0),
-                        result.getString(1),
-                        userRepo.findById(result.getLong(2)).orElse(null),
+                        result.getLong("chat_id"),
+                        result.getString("chat_name"),
+                        userRepo.findById(result.getLong("chat_owner")).orElse(null),
                         new ArrayList<>());
             }
         } catch (SQLException e) {
